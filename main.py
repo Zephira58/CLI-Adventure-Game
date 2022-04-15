@@ -31,7 +31,7 @@ def credits():
     print("Email me on 'Xanthus58@protonmail.com'")
     enter()
     print("Feel free to fork; submit issues; or otherwise interact with the project here!")
-    print("https://github.com/Xanthus58/INSERT-PROJECT")
+    print("https://github.com/Xanthus58/CLI-Adventure-Game")
     enter()
     input("Press Enter to return to the main menu: ")
     cls()
@@ -41,7 +41,7 @@ def scroll(str):
   for letter in str:
     sys.stdout.write(letter)
     sys.stdout.flush()
-    time.sleep(0.05)
+    time.sleep(0.01)
 
 #-Inventory-
 lamp = 0
@@ -53,7 +53,6 @@ t5()
 scroll("It's dark, but you can see from the dimly lit lamp in the corner that you are in a dungeon.\n")
 t5()
 scroll("What do you do: ")
-
 
 while True:
     response = input()
@@ -84,7 +83,7 @@ while True:
             scroll("What do you do: ")
             response = input()
 
-    actions = ["bed","Bed","sleep","Sleep"]
+    actions = ["bed","Bed"]
     for x in actions:
         if CellKey == 0:
             if x in response:
@@ -94,25 +93,46 @@ while True:
                 scroll("You get out of the bed and feel around the hay pile.. You found a "+Fore.YELLOW +"Cell Key!\n"+Fore.WHITE)
                 CellKey = 1
                 scroll("What do you do: ")
-                response = input
-        else:
-            cls()
-            scroll("You lay onto the bed; its still as uncomfterble as you remember.\n")
-            scroll("You're eyes grow heavy, and you slowly drift off into sleep\n")
-            scroll("You slowly awaken; its still the same dark cell you went to sleep in. \n")
+                response = input()
+        elif CellKey == 1:
+            if x in response:
+                cls()
+                scroll("You lay onto the bed; its still as uncomfterble as you remember.\n")
+                scroll("You're eyes grow heavy, and you slowly drift off into sleep\n")
+                scroll("You slowly awaken; its still the same dark cell you went to sleep in. \n")
+                scroll("What do you do: ")
+                response = input()
+
+    actions = ["Use","use"]
+    for x in actions:
+        if x in response:
+            scroll("You can not use this at this time.\n")
             scroll("What do you do: ")
-            response = input
-    actions = ["Gate","gate","Key","key"]
+            input()
+    actions = ["Drink", "drink","Bucket","bucket"]
+    for x in actions:
+        if x in response:
+            scroll("You pick up the bucket, it smeels like rot.\n")
+            scroll("You take a deep breath and gulp down the contents of the bucket\n")
+            scroll("You collapse onto the floor, vomiting. As death firmly graps you.\n")
+            scroll(Fore.RED+"You have perrished. Please try again"+Fore.WHITE)
+            t()
+            credits()
+            break
+
+    actions = ["Gate","gate","escape","Escape"]
     for x in actions:
         if CellKey == 1:
             if x in response:
                 cls()
                 scroll("You use the key to unlock the cell gate and step outside \n")
                 scroll(Fore.GREEN+"Succsess you beat the demo! Please tell me what you think! as this is only a proof of concept."+Fore.WHITE)
+                t()
                 credits()
                 break
-        else:
-            cls()
-            scroll("The gate is locked shut no amount of bashing; pulling; or punching will open it. There must be another way\n")
-            scroll("What do you do: ")
-            response = input()
+        elif CellKey == 0:
+            if x in response:
+                cls()
+                scroll("The gate is locked shut no amount of bashing; pulling; or punching will open it. There must be another way\n")
+                scroll("What do you do: ")
+                response = input()
